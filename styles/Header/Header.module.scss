@@ -1,0 +1,62 @@
+@import "./variables";
+
+.header {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  .pills {
+    width: 60%;
+    height: fit-content;
+    align-self: flex-start;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4rem;
+
+    .pills_image {
+      width: 30%;
+      height: fit-content;
+      display: block;
+
+      .image {
+        object-fit: cover;
+      }
+    }
+    .description {
+      color: $textColor;
+      text-align: justify;
+      word-wrap: break-word;
+      width: 60%;
+      font-size: 1.75rem;
+    }
+  }
+
+  .tabs {
+    width: 60%;
+    height: fit-content;
+    align-self: flex-end;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .tabs_image {
+      width: 50%;
+      height: fit-content;
+      display: block;
+
+      .image {
+        object-fit: cover;
+      }
+    }
+    .description {
+      color: $textColor;
+      text-align: justify;
+      word-wrap: break-word;
+      width: 40%;
+      font-size: 1.75rem;
+    }
+  }
+}

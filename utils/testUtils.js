@@ -7,14 +7,14 @@ import { shallow, mount } from "enzyme";
 // import subredditsSlice from "../features/SubredditsSlice/SubredditsSlice";
 // import seacrhSlice from "../features/SearchSlice/SeacrhSlice";
 
-// export const setUp = (Component, props, path) => {
-//   const wrapper = shallow(
-//     <MemoryRouter initialEntries={[path ? path : "/"]}>
-//       <Component {...props} />
-//     </MemoryRouter>
-//   );
-//   return wrapper.childAt(0).dive();
-// };
+export const setUp = (Component, props, path) => {
+  const wrapper = shallow(
+    // <MemoryRouter initialEntries={[path ? path : "/"]}>
+    <Component {...props} />
+    // </MemoryRouter>
+  );
+  return wrapper; //wrapper.childAt(0).dive();
+};
 // export const setUpRedux = (Component, props, path) => {
 //   const store = configureStore({
 //     reducer: {
