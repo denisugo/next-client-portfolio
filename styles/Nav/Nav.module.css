@@ -44,4 +44,8 @@
   font-size: 2rem;
   margin: auto 20px;
 }
+
+.nav .navigation a:hover {
+  color: #d1d3db;
+}
 /*# sourceMappingURL=Nav.module.css.map */

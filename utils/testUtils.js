@@ -1,18 +1,11 @@
 import { shallow, mount } from "enzyme";
-// import { MemoryRouter } from "react-router";
-// import { Provider } from "react-redux";
-// import postsSlice from "../features/PostsSlice/PostsSlice";
-// import commentsSlice from "../features/CommentsSlice/CommentsSlice";
-// import { configureStore } from "@reduxjs/toolkit";
-// import subredditsSlice from "../features/SubredditsSlice/SubredditsSlice";
-// import seacrhSlice from "../features/SearchSlice/SeacrhSlice";
+import { Provider } from "react-redux";
+import { configureStore } from "@reduxjs/toolkit";
+
+import ProductSlice from "../features/ProductSlice/ProductSlice";
 
 export const setUp = (Component, props, path) => {
-  const wrapper = shallow(
-    // <MemoryRouter initialEntries={[path ? path : "/"]}>
-    <Component {...props} />
-    // </MemoryRouter>
-  );
+  const wrapper = shallow(<Component {...props} />);
   return wrapper; //wrapper.childAt(0).dive();
 };
 // export const setUpRedux = (Component, props, path) => {
@@ -43,5 +36,9 @@ export const findByDataTest = (attr, wrapper) => {
 };
 export const findByDTextChildren = (text, wrapper) => {
   const element = wrapper.find({ children: text });
+  return element;
+};
+export const findByComponent = (componentName, wrapper) => {
+  const element = wrapper.find(componentName);
   return element;
 };

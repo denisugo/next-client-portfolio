@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 import style from "../../styles/Header/Header.module.css";
+import Search from "../Search/Search";
 
 function Header(props) {
   return (
@@ -44,6 +45,7 @@ function Header(props) {
           />
         </div>
       </div>
+      <Search />
     </header>
   );
 }

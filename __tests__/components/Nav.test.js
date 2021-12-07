@@ -5,7 +5,7 @@ import {
   setUp,
 } from "../../utils/testUtils.js";
 
-describe("Nav component", () => {
+describe("Nav", () => {
   const wrapper = setUp(Nav);
 
   it("Should render the nav", () => {

@@ -1,4 +1,4 @@
-@import "./variables";
+@import "../variables";
 
 .nav {
   width: 100vw;
@@ -35,6 +35,10 @@
       font-weight: bold;
       font-size: 2rem;
       margin: auto 20px;
+
+      &:hover {
+        color: $colorOne;
+      }
     }
   }
 }

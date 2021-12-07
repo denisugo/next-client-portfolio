@@ -1,0 +1,17 @@
+@import "../variables";
+
+.button {
+  background: $backgroundColor;
+  border: 2px solid $borderColor;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:hover {
+    background: $colorOne;
+  }
+
+  p {
+    font-weight: bold;
+  }
+}

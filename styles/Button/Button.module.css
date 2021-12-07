@@ -1,0 +1,22 @@
+.button {
+  background: #f9f9fa;
+  border: 2px solid #696c75;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.button:hover {
+  background: #d1d3db;
+}
+
+.button p {
+  font-weight: bold;
+}
+/*# sourceMappingURL=Button.module.css.map */

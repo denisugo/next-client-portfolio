@@ -3,18 +3,18 @@ import {
   findByDTextChildren,
   findByDataTest,
   setUp,
+  findByComponent,
 } from "../../utils/testUtils.js";
 
 describe("Index page", () => {
   const wrapper = setUp(App);
 
-  it('App shows "Hello"', () => {
-    const hello = findByDTextChildren("Hello", wrapper);
-    expect(hello.length).toBe(1);
-  });
-
   it("Should render header", () => {
-    const header = findByDataTest("header", wrapper.find("Header").dive());
+    const header = findByComponent("Header", wrapper);
     expect(header.length).toBe(1);
+  });
+  it("Should render productlist", () => {
+    const productlist = findByComponent("ProductList", wrapper);
+    expect(productlist.length).toBe(1);
   });
 });
