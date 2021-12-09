@@ -34,17 +34,12 @@
   margin-bottom: 4rem;
 }
 
-.header .pills .pills_image {
+.header .pills .image {
   width: 30%;
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
   display: block;
-}
-
-.header .pills .pills_image .image {
-  -o-object-fit: cover;
-     object-fit: cover;
 }
 
 .header .pills .description {
@@ -71,19 +66,15 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  margin-bottom: 4rem;
 }
 
-.header .tabs .tabs_image {
+.header .tabs .image {
   width: 50%;
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
   display: block;
-}
-
-.header .tabs .tabs_image .image {
-  -o-object-fit: cover;
-     object-fit: cover;
 }
 
 .header .tabs .description {

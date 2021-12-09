@@ -3,13 +3,12 @@ import Image from "next/image";
 import style from "../../styles/Header/Header.module.css";
 import Search from "../Search/Search";
 
-function Header(props) {
+function Header({ isMobile }) {
   return (
     <header className={style.header} data-testid="header">
       <div className={style.pills} data-testid="pills">
-        <div className={style.pills_image}>
+        <div className={style.image}>
           <Image
-            className={style.image}
             alt="Pills"
             role="img"
             layout="responsive"
@@ -33,9 +32,8 @@ function Header(props) {
           nunc, ac commodo tellus ipsum a nulla.
         </p>
 
-        <div className={style.tabs_image}>
+        <div className={style.image}>
           <Image
-            className={style.image}
             alt="Tabs"
             role="img"
             layout="responsive"

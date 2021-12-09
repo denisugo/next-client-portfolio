@@ -6,7 +6,7 @@ import { routes } from "../../config/constants";
 import style from "../../styles/Nav/Nav.module.css";
 import { CartIcon, HomeIcon, UserIcon } from "../Icons";
 
-function Nav(props) {
+function Nav({ user }) {
   //const router = useRouter() || { pathname: {} }; // Alternative value for testing purposes
   //const pathname = router.pathname;
 
@@ -35,7 +35,10 @@ function Nav(props) {
             <CartIcon />
           </a>
         </Link>
-        <Link href={routes.login}>
+        <Link
+          href={user ? routes.user : routes.login}
+          data-testid="link-to-login-or-user"
+        >
           <a>
             <UserIcon />
           </a>

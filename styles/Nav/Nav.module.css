@@ -20,11 +20,6 @@
   margin: auto 30px;
 }
 
-.nav .logo .image {
-  -o-object-fit: cover;
-     object-fit: cover;
-}
-
 .nav .navigation {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -40,9 +35,11 @@
 
 .nav .navigation a {
   color: #324248;
-  font-weight: bold;
   font-size: 2rem;
   margin: auto 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .nav .navigation a:hover {

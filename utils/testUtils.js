@@ -3,31 +3,27 @@ import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
 
 import ProductSlice from "../features/ProductSlice/ProductSlice";
+import UserSlice from "../features/UserSlice/UserSlice";
 
 export const setUp = (Component, props, path) => {
   const wrapper = shallow(<Component {...props} />);
-  return wrapper; //wrapper.childAt(0).dive();
+  return wrapper;
 };
-// export const setUpRedux = (Component, props, path) => {
+// export const setUpRedux = (Component, props) => {
 //   const store = configureStore({
 //     reducer: {
-//       posts: postsSlice,
-//       comments: commentsSlice,
-//       subreddits: subredditsSlice,
-//       search: seacrhSlice,
+//       user: UserSlice,
+//       //TODO: Add reducers
 //     },
 //   });
 
 //   const wrapper = mount(
 //     <Provider store={store}>
-//       <MemoryRouter initialEntries={[path ? path : "/"]}>
-//         <Component {...props} />
-//       </MemoryRouter>
+//       <Component {...props} />
 //     </Provider>
 //   );
 
 //   return wrapper;
-//   // return wrapper.childAt(0).dive();
 // };
 
 export const findByDataTest = (attr, wrapper) => {

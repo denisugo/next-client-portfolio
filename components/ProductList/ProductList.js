@@ -1,8 +1,9 @@
 import Product from "../Product/Product";
+import style from "../../styles/ProductList/ProductList.module.css";
 
 function ProductList({ list }) {
   return (
-    <div data-testid="productlist">
+    <div className={style.container} data-testid="productlist">
       {list.map((product) => (
         <Product
           key={product.id}

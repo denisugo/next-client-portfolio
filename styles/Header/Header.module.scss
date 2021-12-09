@@ -16,14 +16,14 @@
     align-items: center;
     margin-bottom: 4rem;
 
-    .pills_image {
+    .image {
       width: 30%;
       height: fit-content;
       display: block;
 
-      .image {
-        object-fit: cover;
-      }
+      // .image {
+      //   object-fit: cover;
+      // }
     }
     .description {
       color: $textColor;
@@ -41,15 +41,16 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 4rem;
 
-    .tabs_image {
+    .image {
       width: 50%;
       height: fit-content;
       display: block;
 
-      .image {
-        object-fit: cover;
-      }
+      // .image {
+      //   object-fit: cover;
+      // }
     }
     .description {
       color: $textColor;
