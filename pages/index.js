@@ -17,6 +17,7 @@ export default function Home({ list, user, isMobile }) {
 
 export const getServerSideProps = async (context) => {
   const endpoint = routes.products;
+  //TODO: delete category from query string, it will be parsed with use state and map functions
   const category = context.query.category;
 
   const isMobile = false;
@@ -41,6 +42,7 @@ export const getServerSideProps = async (context) => {
 
   const jsonResponse = await response.json();
   const list = jsonResponse.products;
+  // if user already exists, dont do anything
   const user = jsonResponse.user ? jsonResponse.user : null; // TODO: add this value as payload in initUser
   // console.log("====================================");
   // console.log(context.req.cookies);

@@ -1,6 +1,5 @@
-.button {
-  background: #f9f9fa;
-  border: 4px solid #696c75;
+.search {
+  width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -10,18 +9,12 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  cursor: pointer;
 }
 
-.button:hover {
-  background: #d1d3db;
+.search .select_by_category {
+  margin: 15px 10px;
+  height: 30px;
+  border-radius: 0;
+  border: 2px solid #696c75;
 }
-
-.button:active {
-  background: #ecedf0;
-}
-
-.button p {
-  font-weight: bold;
-}
-/*# sourceMappingURL=Button.module.css.map */
+/*# sourceMappingURL=Search.module.css.map */

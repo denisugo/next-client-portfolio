@@ -2,13 +2,18 @@
 
 .button {
   background: $backgroundColor;
-  border: 2px solid $borderColor;
+  border: 4px solid $borderColor;
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 
   &:hover {
     background: $colorOne;
+  }
+
+  &:active {
+    background: $colorTwo;
   }
 
   p {

@@ -81,7 +81,7 @@ describe("UserSlice", () => {
 
       expect(error).toBe(true);
       expect(loading).toBe(false);
-      expect(user).toBeUndefined();
+      expect(user).toBe(null);
     });
 
     it("Should set error to true when got rejected", async () => {
@@ -96,7 +96,7 @@ describe("UserSlice", () => {
 
       expect(error).toBe(true);
       expect(loading).toBe(false);
-      expect(user).toBeUndefined();
+      expect(user).toBe(null);
     });
   });
 });

@@ -1,10 +1,17 @@
 import style from "../../styles/Button/Button.module.css";
 
-function Button({ width, height, text, callback, label = "button" }) {
+function Button({
+  width,
+  height,
+  text,
+  callback,
+  fontSize = undefined,
+  label = "button",
+}) {
   return (
-    <div
+    <button
       className={style.button}
-      style={{ width, height }}
+      style={{ width, height, fontSize }}
       data-testid="button"
       role="button"
       aria-label={label}
@@ -12,7 +19,7 @@ function Button({ width, height, text, callback, label = "button" }) {
       onSelect={callback}
     >
       <p>{text}</p>
-    </div>
+    </button>
   );
 }
 

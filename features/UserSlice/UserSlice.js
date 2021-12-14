@@ -1,14 +1,29 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-const url = process.env.HOST;
+const url = `${process.env.HOST}/login`;
 
 export const logInUser = createAsyncThunk(
   "user/logInUser",
   async ({ username, password }) => {
-    //TODO: make post request
-    const response = await fetch(url);
-    if (response.ok) return await response.json();
-    throw new Error("Rejected");
+    const body = `${encodeURIComponent("username")}=${encodeURIComponent(
+      username
+    )}&${encodeURIComponent("password")}=${encodeURIComponent(password)}`;
+
+    const fetchedUser = await fetch(url, {
+      method: "POST",
+      credentials: "include",
+      body,
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        Accept: "application/json",
+      },
+    });
+
+    if (!fetchedUser.ok) throw new Error("Rejected");
+
+    const user = await fetchedUser.json();
+
+    return user;
   }
 );
 
@@ -28,7 +43,7 @@ const UserSlice = createSlice({
     [logInUser.pending]: (state, action) => {
       state.loading = true;
       state.error = false;
-      state.user = undefined;
+      state.user = null;
     },
     [logInUser.fulfilled]: (state, action) => {
       state.loading = false;
@@ -38,7 +53,7 @@ const UserSlice = createSlice({
     [logInUser.rejected]: (state, action) => {
       state.loading = false;
       state.error = true;
-      state.user = undefined;
+      state.user = null;
     },
   },
 });
