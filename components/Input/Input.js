@@ -11,7 +11,7 @@ function Input({
   required = false,
   className = "",
   label = "input",
-  ...props
+  pattern = undefined,
 }) {
   return (
     <input
@@ -27,7 +27,7 @@ function Input({
       name={label}
       aria-label={label}
       data-testid="input"
-      {...props}
+      pattern={pattern}
     />
   );
 }

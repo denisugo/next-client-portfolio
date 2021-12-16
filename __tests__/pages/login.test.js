@@ -36,7 +36,7 @@ describe("Login page", () => {
       const buttons = findByComponent("Button", wrapper);
       expect(buttons.length).toBe(2);
     });
-    it("Should render 2 ", () => {
+    it("Should render 2 inputs", () => {
       const fields = findByComponent("Input", wrapper);
       expect(fields.length).toBe(2);
     });
@@ -63,7 +63,7 @@ describe("Login page", () => {
 
         expect(dispatch.mock.calls.length).toBe(1);
         expect(reactRedux.useDispatch.mock.calls.length).toBe(3); // Should be 3 because useState rerender the component
-        expect(reactRedux.useSelector.mock.calls.length).toBe(6); // Should be 3 because useState rerender the component
+        expect(reactRedux.useSelector.mock.calls.length).toBe(6); // Should be 6 because useState rerender the component
       });
     });
   });

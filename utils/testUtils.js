@@ -1,6 +1,7 @@
 import { shallow, mount } from "enzyme";
 import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
+const { By } = require("selenium-webdriver");
 
 //import ProductSlice from "../features/ProductSlice/ProductSlice";
 import UserSlice from "../features/UserSlice/UserSlice";
@@ -26,15 +27,23 @@ export const setUp = (Component, props, path) => {
 //   return wrapper;
 // };
 
+export const findByDataTestSelenium = (attr, driver) => {
+  const elements = driver.findElements(By.css(`[data-testid='${attr}']`));
+  return elements;
+};
+export const findByComponentSelenium = (componentCssName, driver) => {
+  const elements = driver.findElements(By.css(`${componentCssName}`));
+  return elements;
+};
 export const findByDataTest = (attr, wrapper) => {
-  const element = wrapper.find(`[data-testid='${attr}']`);
-  return element;
+  const elements = wrapper.find(`[data-testid='${attr}']`);
+  return elements;
 };
 export const findByTextChildren = (text, wrapper) => {
-  const element = wrapper.find({ children: text });
-  return element;
+  const elements = wrapper.find({ children: text });
+  return elements;
 };
 export const findByComponent = (componentName, wrapper) => {
-  const element = wrapper.find(componentName);
-  return element;
+  const elements = wrapper.find(componentName);
+  return elements;
 };

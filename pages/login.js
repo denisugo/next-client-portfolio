@@ -14,7 +14,7 @@ import {
 import { routes } from "../config/constants";
 
 function Login({ isMobile }) {
-  // Field setup
+  // Inputs setup
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -25,6 +25,10 @@ function Login({ isMobile }) {
 
   useEffect(() => {
     if (user && !error) router.push(routes.user);
+    if (error) {
+      setPassword("");
+      setUsername("");
+    }
   }, [user, error]);
 
   const handleLogin = (event) => {
@@ -37,7 +41,6 @@ function Login({ isMobile }) {
       <Meta title="Login page" description="test" />
       <div>
         <form onSubmit={handleLogin} className={style.form}>
-          {/* <div className={style.form_item}> */}
           <Input
             placeholder="username"
             value={username}
@@ -50,11 +53,7 @@ function Login({ isMobile }) {
             required={true}
             pattern="([a-z]|[0-9]){2,8}"
           />
-          {/* <p className={style.hint}>
-              Should be lowercase and 2-8 characters in length.
-            </p> */}
-          {/* </div> */}
-          {/* <div className={style.form_item}> */}
+
           <Input
             placeholder="password"
             value={password}
@@ -67,15 +66,12 @@ function Login({ isMobile }) {
             required={true}
             pattern="^.{4,}$"
           />
-          {/* <p className={style.hint}>
-              Should be at least and 4 characters in length.
-            </p> */}
-          {/* </div> */}
+
           <Button
             text="Log me in"
             height={50}
             width={250}
-            label="Log in"
+            label="Login"
             fontSize={17}
             callback={() => {}}
             data-testid="login-button"
