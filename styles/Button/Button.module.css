@@ -13,7 +13,7 @@
   cursor: pointer;
 }
 
-.button:hover {
+.button:hover, .button:focus {
   background: #d1d3db;
 }
 
@@ -23,5 +23,6 @@
 
 .button p {
   font-weight: bold;
+  color: #324248;
 }
 /*# sourceMappingURL=Button.module.css.map */

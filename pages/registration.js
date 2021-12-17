@@ -33,6 +33,9 @@ function Registration(props) {
     if (error) {
       setPassword("");
       setUsername("");
+      setEmail("");
+      setFirstName("");
+      setLastName("");
     }
   }, [user, error]);
 

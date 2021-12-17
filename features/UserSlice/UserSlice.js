@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { HYDRATE } from "next-redux-wrapper";
 import { endpoints } from "../../config/constants";
 
 export const logInUser = createAsyncThunk(
@@ -25,6 +26,25 @@ export const logInUser = createAsyncThunk(
     const user = await fetchedUser.json();
 
     return user;
+  }
+);
+
+export const logOutUser = createAsyncThunk(
+  "user/logOutUser",
+  async (id = 3) => {
+    const url = `${process.env.HOST}${endpoints.logout(id)}`;
+
+    const fetched = await fetch(url, {
+      method: "GET",
+      credentials: "include",
+      headers: {
+        Accept: "application/json",
+      },
+    });
+
+    if (!fetched.ok) throw new Error("Rejected");
+
+    return null;
   }
 );
 
@@ -61,6 +81,31 @@ export const registerUser = createAsyncThunk(
   }
 );
 
+export const updateUser = createAsyncThunk(
+  "user/updateUser",
+  async ({ field, value, id }) => {
+    const body = `${"field"}=${encodeURIComponent(
+      field
+    )}&${"value"}=${encodeURIComponent(value)}`;
+
+    const url = `${process.env.HOST}${endpoints.user(id)}`;
+
+    const fetchedUser = await fetch(url, {
+      method: "PUT",
+      credentials: "include",
+      body,
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        Accept: "application/json",
+      },
+    });
+
+    if (!fetchedUser.ok) throw new Error("Rejected");
+
+    return { [field]: value };
+  }
+);
+
 const UserSlice = createSlice({
   name: "user",
   initialState: {
@@ -74,6 +119,18 @@ const UserSlice = createSlice({
     },
   },
   extraReducers: {
+    [HYDRATE]: (state, action) => {
+      console.log("HYDRATE", state, action.payload);
+
+      action.payload = { ...action.payload.user };
+
+      if (action.payload.user === null) delete action.payload.user;
+      if (action.payload.loading === false) delete action.payload.loading;
+      if (action.payload.error === false) delete action.payload.error;
+      return { ...state, ...action.payload };
+    },
+
+    // Login handler
     [logInUser.pending]: (state, action) => {
       state.loading = true;
       state.error = false;
@@ -89,6 +146,23 @@ const UserSlice = createSlice({
       state.error = true;
       state.user = null;
     },
+    // Logout handler
+    [logOutUser.pending]: (state, action) => {
+      state.loading = true;
+      state.error = false;
+      state.user = null;
+    },
+    [logOutUser.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.error = false;
+      state.user = action.payload;
+    },
+    [logOutUser.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = true;
+      state.user = null;
+    },
+    // Registration handler
     [registerUser.pending]: (state, action) => {
       state.loading = true;
       state.error = false;
@@ -103,6 +177,20 @@ const UserSlice = createSlice({
       state.loading = false;
       state.error = true;
       state.user = null;
+    },
+    // Update user handler
+    [updateUser.pending]: (state, action) => {
+      state.loading = true;
+      state.error = false;
+    },
+    [updateUser.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.error = false;
+      state.user = { ...state.user, ...action.payload };
+    },
+    [updateUser.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = true;
     },
   },
 });

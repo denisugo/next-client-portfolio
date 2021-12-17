@@ -38,7 +38,7 @@ describe("Selenium registration page", () => {
     expect(hints.length).toBe(5);
   });
 
-  it("Should  redirect to user", async () => {
+  it("Should redirect to user", async () => {
     const username = "jafar";
     const password = "secret01";
     const email = "jafar@gmail.com";
@@ -66,34 +66,31 @@ describe("Selenium registration page", () => {
     expect(url).toBe(`http://localhost:3000/user`);
   });
 
-  //   it("Should not redirect to user", async () => {
-  //     const username = "jb";
-  //     const password = "secret";
-  //     const email = "error.com"; //error in email format
-  //     const firstName = "Abdul";
-  //     const lastName = "Jafar";
+  it("Should not redirect to user", async () => {
+    const username = "jb";
+    const password = "secret";
+    const email = "error.com"; //error in email format
+    const firstName = "Abdul";
+    const lastName = "Jafar";
 
-  //     const button = (await findByDataTestSelenium("button", driver))[0]; //  Log me in
-  //     const firstNameField = (await findByDataTestSelenium("input", driver))[0];
-  //     const lastNameField = (await findByDataTestSelenium("input", driver))[1];
-  //     const emailField = (await findByDataTestSelenium("input", driver))[2];
-  //     const usernameField = (await findByDataTestSelenium("input", driver))[3];
-  //     const passwordField = (await findByDataTestSelenium("input", driver))[4];
+    const button = (await findByDataTestSelenium("button", driver))[0]; //  Log me in
+    const firstNameField = (await findByDataTestSelenium("input", driver))[0];
+    const lastNameField = (await findByDataTestSelenium("input", driver))[1];
+    const emailField = (await findByDataTestSelenium("input", driver))[2];
+    const usernameField = (await findByDataTestSelenium("input", driver))[3];
+    const passwordField = (await findByDataTestSelenium("input", driver))[4];
 
-  //     await firstNameField.sendKeys(firstName);
-  //     await lastNameField.sendKeys(lastName);
-  //     await emailField.sendKeys(email);
-  //     await usernameField.sendKeys(username);
-  //     await passwordField.sendKeys(password);
+    await firstNameField.sendKeys(firstName);
+    await lastNameField.sendKeys(lastName);
+    await emailField.sendKeys(email);
+    await usernameField.sendKeys(username);
+    await passwordField.sendKeys(password);
 
-  //     const actions = driver.actions({ async: true });
-  //     await actions.move({ origin: button }).press().release().perform();
+    const actions = driver.actions({ async: true });
+    await actions.move({ origin: button }).press().release().perform();
 
-  //     await driver.wait(async () => {
-  //       const val = await usernameField.getAttribute("value");
-  //       return val === "";
-  //     }, 3000);
-  //     const url = await driver.getCurrentUrl();
-  //     expect(url).toBe(`http://localhost:3000/registration`);
-  //   });
+    await new Promise((resolved) => setTimeout(resolved, 3000));
+    const url = await driver.getCurrentUrl();
+    expect(url).toBe(`http://localhost:3000/registration`);
+  });
 });

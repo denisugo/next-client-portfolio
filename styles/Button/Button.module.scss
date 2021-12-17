@@ -8,7 +8,8 @@
   align-items: center;
   cursor: pointer;
 
-  &:hover {
+  &:hover,
+  &:focus {
     background: $colorOne;
   }
 
@@ -18,5 +19,6 @@
 
   p {
     font-weight: bold;
+    color: $textColor;
   }
 }

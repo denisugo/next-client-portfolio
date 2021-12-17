@@ -7,6 +7,8 @@ import UserSlice, {
   logInUser,
   initUser,
   registerUser,
+  logOutUser,
+  updateUser,
 } from "../../features/UserSlice/UserSlice";
 
 describe("UserSlice", () => {
@@ -101,6 +103,123 @@ describe("UserSlice", () => {
     });
   });
 
+  describe("updateUser", () => {
+    const credentials = { value: "Zakhar", field: "first_name", id: 200 };
+    beforeEach(() => {
+      fetch.resetMocks();
+    });
+
+    it("Should update user info", async () => {
+      // mocking fetch
+      fetch.mockResolvedValueOnce({
+        ok: true,
+        json: () => {
+          return {};
+        },
+      });
+      await store.dispatch(updateUser(credentials));
+
+      const error = selectUserError(store.getState());
+      const loading = selectUserLoading(store.getState());
+      const user = selectUser(store.getState());
+
+      expect(error).toBe(false);
+      expect(loading).toBe(false);
+      expect(typeof user).toBe("object");
+      expect(user[credentials.field]).toBe(credentials.value);
+    });
+
+    it("Should set error to true when response.ok=false", async () => {
+      // mocking fetch
+      fetch.mockResolvedValueOnce({
+        ok: false,
+        json: () => undefined,
+      });
+
+      await store.dispatch(updateUser(credentials));
+
+      const error = selectUserError(store.getState());
+      const loading = selectUserLoading(store.getState());
+      const user = selectUser(store.getState());
+
+      expect(error).toBe(true);
+      expect(loading).toBe(false);
+      expect(user).toBe(null);
+    });
+
+    it("Should set error to true when got rejected", async () => {
+      // mocking fetch
+      fetch.mockRejectedValueOnce({});
+
+      await store.dispatch(updateUser(credentials));
+
+      const error = selectUserError(store.getState());
+      const loading = selectUserLoading(store.getState());
+      const user = selectUser(store.getState());
+
+      expect(error).toBe(true);
+      expect(loading).toBe(false);
+      expect(user).toBe(null);
+    });
+  });
+
+  describe("logOutUser", () => {
+    beforeEach(() => {
+      fetch.resetMocks();
+    });
+
+    it("Should log the user out", async () => {
+      // mocking fetch
+      fetch.mockResolvedValueOnce({
+        ok: true,
+        json: () => {
+          return {};
+        },
+      });
+      await store.dispatch(logOutUser());
+
+      const error = selectUserError(store.getState());
+      const loading = selectUserLoading(store.getState());
+      const user = selectUser(store.getState());
+
+      expect(error).toBe(false);
+      expect(loading).toBe(false);
+      expect(user).toBe(null);
+    });
+
+    it("Should set error to true when response.ok=false", async () => {
+      // mocking fetch
+      fetch.mockResolvedValueOnce({
+        ok: false,
+        json: () => undefined,
+      });
+
+      await store.dispatch(logOutUser());
+
+      const error = selectUserError(store.getState());
+      const loading = selectUserLoading(store.getState());
+      const user = selectUser(store.getState());
+
+      expect(error).toBe(true);
+      expect(loading).toBe(false);
+      expect(user).toBe(null);
+    });
+
+    it("Should set error to true when got rejected", async () => {
+      // mocking fetch
+      fetch.mockRejectedValueOnce({});
+
+      await store.dispatch(logOutUser());
+
+      const error = selectUserError(store.getState());
+      const loading = selectUserLoading(store.getState());
+      const user = selectUser(store.getState());
+
+      expect(error).toBe(true);
+      expect(loading).toBe(false);
+      expect(user).toBe(null);
+    });
+  });
   describe("registerUser", () => {
     const credentials = {
       username: "abdul",
