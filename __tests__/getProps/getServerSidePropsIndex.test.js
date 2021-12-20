@@ -1,15 +1,23 @@
 import { getServerSideProps } from "../../pages/index";
 
-describe("getServerSideProps on index.js", () => {
-  const context = {
-    query: { category: "health", req: { cookies: {} } },
-  };
+import * as UserSlice from "../../features/UserSlice/UserSlice";
+
+describe("getServerSideProps in index.js", () => {
+  let context;
 
   beforeEach(() => {
+    //  Setup for fetch redux
     fetch.resetMocks();
+    //  Setup for react redux
+    UserSlice.initUser = jest.fn().mockReturnValue({ type: "", payload: {} });
+    // Setup for context
+    context = {
+      req: { cookies: { "connect.sid": "asswa" } },
+      res: { setHeader: jest.fn() },
+    };
   });
 
-  it("Should return list,isMobile, user", async () => {
+  it("Should return list", async () => {
     fetch.mockResolvedValueOnce({
       ok: true,
       json: () => {
@@ -20,13 +28,13 @@ describe("getServerSideProps on index.js", () => {
     const { props } = await getServerSideProps(context);
 
     expect(typeof props).toBe("object");
-    expect(typeof props.user).toBe("object");
     expect(props.user).not.toBe(null);
     expect(Array.isArray(props.list)).toBe(true);
-    expect(props.isMobile).toBe(false);
+    expect(UserSlice.initUser.mock.calls.length).toBe(1);
+    // expect(props.isMobile).toBe(false);
   });
 
-  it("Should return null in list and user if response is not ok ", async () => {
+  it("Should return null in list if response is not ok ", async () => {
     fetch.mockResolvedValueOnce({
       ok: false,
       json: () => {
@@ -37,8 +45,43 @@ describe("getServerSideProps on index.js", () => {
     const { props } = await getServerSideProps(context);
 
     expect(typeof props).toBe("object");
-    expect(props.user).toBe(null);
     expect(props.list).toBe(null);
-    expect(props.isMobile).toBe(false);
+    expect(UserSlice.initUser.mock.calls.length).toBe(0);
+    // expect(props.isMobile).toBe(false);
+  });
+
+  it("Should return a list but not set up a user if no cookie provided", async () => {
+    context.req.cookies = {};
+    fetch.mockResolvedValueOnce({
+      ok: true,
+      json: () => {
+        return { user: undefined, products: [{}, {}] };
+      },
+    });
+
+    const { props } = await getServerSideProps(context);
+
+    expect(typeof props).toBe("object");
+    expect(props.list).not.toBe(null);
+    expect(UserSlice.initUser.mock.calls.length).toBe(0);
+    expect(context.res.setHeader.mock.calls.length).toBe(0);
+    // expect(props.isMobile).toBe(false);
+  });
+  it("Should return a list but not set up a user and delete cookie if provided cookie is incorrect", async () => {
+    context.req.cookies = { "connect.sid": "afsd" };
+    fetch.mockResolvedValueOnce({
+      ok: true,
+      json: () => {
+        return { user: undefined, products: [{}, {}] };
+      },
+    });
+
+    const { props } = await getServerSideProps(context);
+
+    expect(typeof props).toBe("object");
+    expect(props.list).not.toBe(null);
+    expect(UserSlice.initUser.mock.calls.length).toBe(0);
+    expect(context.res.setHeader.mock.calls.length).toBe(1);
+    // expect(props.isMobile).toBe(false);
   });
 });

@@ -9,6 +9,7 @@ import UserSlice, {
   registerUser,
   logOutUser,
   updateUser,
+  getUser,
 } from "../../features/UserSlice/UserSlice";
 
 describe("UserSlice", () => {
@@ -92,6 +93,65 @@ describe("UserSlice", () => {
       fetch.mockRejectedValueOnce({});
 
       await store.dispatch(logInUser(credentials));
+
+      const error = selectUserError(store.getState());
+      const loading = selectUserLoading(store.getState());
+      const user = selectUser(store.getState());
+
+      expect(error).toBe(true);
+      expect(loading).toBe(false);
+      expect(user).toBe(null);
+    });
+  });
+
+  describe("logInUser", () => {
+    const credentials = { username: "abdul", password: "Jafar129" };
+    beforeEach(() => {
+      fetch.resetMocks();
+    });
+
+    it("Should get the user ", async () => {
+      // mocking fetch
+      fetch.mockResolvedValueOnce({
+        ok: true,
+        json: () => {
+          return {};
+        },
+      });
+      await store.dispatch(getUser(credentials));
+
+      const error = selectUserError(store.getState());
+      const loading = selectUserLoading(store.getState());
+      const user = selectUser(store.getState());
+
+      expect(error).toBe(false);
+      expect(loading).toBe(false);
+      expect(typeof user).toBe("object");
+    });
+
+    it("Should set error to true when response.ok=false", async () => {
+      // mocking fetch
+      fetch.mockResolvedValueOnce({
+        ok: false,
+        json: () => undefined,
+      });
+
+      await store.dispatch(getUser(credentials));
+
+      const error = selectUserError(store.getState());
+      const loading = selectUserLoading(store.getState());
+      const user = selectUser(store.getState());
+
+      expect(error).toBe(true);
+      expect(loading).toBe(false);
+      expect(user).toBe(null);
+    });
+
+    it("Should set error to true when got rejected", async () => {
+      // mocking fetch
+      fetch.mockRejectedValueOnce({});
+
+      await store.dispatch(getUser(credentials));
 
       const error = selectUserError(store.getState());
       const loading = selectUserLoading(store.getState());

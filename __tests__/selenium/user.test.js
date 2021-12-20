@@ -13,13 +13,14 @@ describe("Selenium User page", () => {
   const firstName = "Abdul";
   const lastName = "Jafar";
   const newFirstName = "Boris";
+  let cookie;
 
   beforeAll(async () => {
     await driver.get("http://localhost:3000/registration");
   });
 
-  afterAll(() => {
-    driver.manage().deleteAllCookies();
+  afterAll(async () => {
+    await driver.manage().deleteAllCookies();
   });
   afterAll(async () => {
     await driver.quit();
@@ -48,6 +49,7 @@ describe("Selenium User page", () => {
     await driver.wait(until.urlIs("http://localhost:3000/user"), 3000);
     const url = await driver.getCurrentUrl();
     expect(url).toBe(`http://localhost:3000/user`);
+    cookie = await driver.manage().getCookies()[0];
   });
 
   it("Should open user page", async () => {
@@ -124,6 +126,12 @@ describe("Selenium User page", () => {
   });
 
   it("Should redirect to login page when no user provided", async () => {
+    await driver.get("http://localhost:3000/user");
+    await driver.wait(until.urlIs("http://localhost:3000/login"), 3000);
+    const url = await driver.getCurrentUrl();
+    expect(url).toBe(`http://localhost:3000/login`);
+  });
+  it("Should fetch a user if cookie is provided", async () => {
     await driver.get("http://localhost:3000/user");
     await driver.wait(until.urlIs("http://localhost:3000/login"), 3000);
     const url = await driver.getCurrentUrl();

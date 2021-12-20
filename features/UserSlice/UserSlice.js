@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
+
 import { endpoints } from "../../config/constants";
 
 export const logInUser = createAsyncThunk(
@@ -47,6 +48,24 @@ export const logOutUser = createAsyncThunk(
     return null;
   }
 );
+
+export const getUser = createAsyncThunk("user/getUser", async (cookie = "") => {
+  const url = `${process.env.HOST}${endpoints.user("")}`;
+
+  const fetched = await fetch(url, {
+    method: "GET",
+    credentials: "include",
+    headers: {
+      Accept: "application/json",
+      Cookie: cookie,
+    },
+  });
+
+  if (!fetched.ok) throw new Error("Rejected");
+
+  const user = await fetched.json();
+  return user;
+});
 
 export const registerUser = createAsyncThunk(
   "user/registerUser",
@@ -130,6 +149,22 @@ const UserSlice = createSlice({
       return { ...state, ...action.payload };
     },
 
+    // Get handler
+    [getUser.pending]: (state, action) => {
+      state.loading = true;
+      state.error = false;
+      state.user = null;
+    },
+    [getUser.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.error = false;
+      state.user = action.payload;
+    },
+    [getUser.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = true;
+      state.user = null;
+    },
     // Login handler
     [logInUser.pending]: (state, action) => {
       state.loading = true;

@@ -1,14 +1,19 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
 
 import { routes } from "../../config/constants";
+import { selectUser } from "../../features/UserSlice/UserSlice";
 import style from "../../styles/Nav/Nav.module.css";
 import { CartIcon, HomeIcon, UserIcon } from "../Icons";
 
-function Nav({ user }) {
+function Nav() {
+  // function Nav({ user }) {
   //const router = useRouter() || { pathname: {} }; // Alternative value for testing purposes
   //const pathname = router.pathname;
+
+  const user = useSelector(selectUser);
 
   return (
     <div className={style.nav} data-testid="nav">
@@ -30,7 +35,7 @@ function Nav({ user }) {
             <HomeIcon />
           </a>
         </Link>
-        <Link href={routes.cart}>
+        <Link href={user ? routes.cart : routes.login}>
           <a>
             <CartIcon />
           </a>

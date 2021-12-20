@@ -11,8 +11,8 @@ describe("Selenium registration page", () => {
     await driver.get("http://localhost:3000/registration");
   });
 
-  afterEach(() => {
-    driver.manage().deleteAllCookies();
+  afterAll(async () => {
+    await driver.manage().deleteAllCookies();
   });
   afterAll(async () => {
     await driver.quit();

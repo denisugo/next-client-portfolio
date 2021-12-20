@@ -55,7 +55,7 @@ describe("User page", () => {
       expect(router.default.push.mock.calls.length).toBe(0);
     });
     it("Should redirect to login page when no user provided", () => {
-      reactRedux.useSelector = jest.fn().mockReturnValue(undefined);
+      reactRedux.useSelector = jest.fn().mockReturnValue(null);
       UserSlice.selectUser = jest.fn();
       router.default.push = jest.fn();
       jest.spyOn(React, "useEffect").mockImplementationOnce((f) => f());

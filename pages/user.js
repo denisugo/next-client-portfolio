@@ -6,6 +6,7 @@ import Input from "../components/Input/Input";
 import Button from "../components/Button/Button";
 import Meta from "../components/Head/Meta";
 import {
+  getUser,
   initUser,
   logOutUser,
   selectUser,
@@ -18,6 +19,7 @@ import { store, wrapper } from "../app/store";
 
 function User() {
   // redux setup
+
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
 
@@ -219,6 +221,22 @@ function User() {
 
 export default User;
 
+// export const getServerSideProps = async (context) => {
+//   if (!context.req.cookies["connect.sid"])
+//     return {
+//       redirect: {
+//         destination: routes.login,
+//         permanent: false,
+//       },
+//     };
+
+//   return {
+//     props: {
+//       cookie: context.req.cookies["connect.sid"],
+//     },
+//   };
+// };
+
 // export const getServerSideProps = wrapper.getServerSideProps(
 //   (store) => async (context) => {
 //     store.dispatch(
@@ -253,28 +271,29 @@ export default User;
 //   }
 // );
 
-// export const getStaticProps = async (context) => {
-//   // const user = context.query.body;
-//   // console.log(user);
-//   // if (user)
-//   return {
-//     props: {
-//       username: "username",
-//       password: "******",
-//       email: "your@email.com",
-//       firstName: "Name",
-//       lastName: "Surname",
-//       // username: user.username,
-//       // password: "******",
-//       // email: user.email,
-//       // firstName: user.first_name,
-//       // lastName: user.last_name,
-//     },
-//   };
-//   // return {
-//   //   redirect: {
-//   //     destination: routes.login,
-//   //     permanent: false,
-//   //   },
-//   // };
-// };
+// export const getServerSideProps = wrapper.getServerSideProps(
+//   (store) => async (context) => {
+//     await store.dispatch(
+//       getUser(`connect.sid=${context.req.cookies["connect.sid"]}`)
+//     );
+//     const user = selectUser(store.getState());
+
+//     if (user)
+//       return {
+//         props: {
+//           user, // not used
+//         },
+//       };
+
+//     context.res.setHeader(
+//       "Set-cookie",
+//       "connect.sid=deleted; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT"
+//     );
+//     return {
+//       redirect: {
+//         destination: routes.login,
+//         permanent: false,
+//       },
+//     };
+//   }
+// );

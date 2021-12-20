@@ -8,8 +8,8 @@ describe("Selenium login page", () => {
     await driver.get("http://localhost:3000/login");
   });
 
-  afterEach(() => {
-    driver.manage().deleteAllCookies();
+  afterAll(async () => {
+    await driver.manage().deleteAllCookies();
   });
   afterAll(async () => {
     await driver.quit();
