@@ -21,8 +21,8 @@ describe("Header", () => {
     const tabs = findByDataTest("tabs", wrapper);
     expect(tabs.length).toBe(1);
   });
-  it("Should render search", () => {
-    const search = findByComponent("Search", wrapper);
-    expect(search.length).toBe(1);
-  });
+  // it("Should render search", () => {
+  //   const search = findByComponent("Search", wrapper);
+  //   expect(search.length).toBe(1);
+  // });
 });

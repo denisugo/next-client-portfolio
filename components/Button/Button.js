@@ -7,10 +7,12 @@ function Button({
   callback,
   fontSize = undefined,
   label = "button",
+  className = "",
 }) {
   return (
     <button
-      className={style.button}
+      //className={style.button}
+      className={`${style.button} ${className}`}
       style={{ width, height, fontSize }}
       data-testid="button"
       role="button"

@@ -6,6 +6,7 @@ function ProductList({ list }) {
     <div className={style.container} data-testid="productlist">
       {list.map((product) => (
         <Product
+          id={product.id}
           key={product.id}
           name={product.name}
           description={product.description}

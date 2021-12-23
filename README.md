@@ -22,4 +22,5 @@ This app was build with Next js framework, tested with Jest and Selenium.
 - Allow user to delete their account.
 - Recreate all components that contains `form ` item. It is importtant for the following todo.
 - Improve tests. Some tests requirs _teardown_ phase. Not all component have 100% test coverage.
-- Add mobile versiom
+- Add mobile version
+- Refactor selenium test suits

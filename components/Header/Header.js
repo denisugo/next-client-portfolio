@@ -43,7 +43,7 @@ function Header({ isMobile }) {
           />
         </div>
       </div>
-      <Search />
+      {/* <Search /> */}
     </header>
   );
 }

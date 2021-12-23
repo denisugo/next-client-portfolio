@@ -9,6 +9,7 @@ import {
 describe("Product", () => {
   const props = {
     id: 1,
+    key: 1,
     name: "Name",
     description: "Desc",
     price: 100,

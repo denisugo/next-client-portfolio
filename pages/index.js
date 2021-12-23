@@ -1,23 +1,30 @@
+import { useState } from "react";
+
 import Meta from "../components/Head/Meta";
 import Header from "../components/Header/Header";
 import ProductList from "../components/ProductList/ProductList";
-import { routes } from "../config/constants";
+import Search from "../components/Search/Search";
+import { endpoints, routes } from "../config/constants";
 import { initUser } from "../features/UserSlice/UserSlice";
 import { wrapper } from "../app/store";
 
-export default function Home({ list }) {
+function Home({ list }) {
   // export default function Home({ list, user, isMobile }) {
   //TODO: select user, render 'add new' button if admin
+
+  const [productList, setProductList] = useState(list);
 
   return (
     <>
       <Meta title="Main page" description="test" />
       <Header />
-      <ProductList list={list} />
+      <Search list={list} callback={setProductList} />
+      <ProductList list={productList} />
     </>
   );
 }
 
+export default Home;
 // export const getServerSideProps = async (context) => {
 //   const endpoint = routes.products;
 //   //TODO: delete category from query string, it will be parsed with use state and map functions
@@ -69,9 +76,10 @@ export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (context) => {
     const connectSidCookie = context.req.cookies["connect.sid"];
     const cookie = `connect.sid=${connectSidCookie}`;
-    const endpoint = routes.products;
+    const endpoint = endpoints.products();
+    const url = `${process.env.HOST}${endpoint}`;
 
-    const response = await fetch(`${process.env.HOST}${endpoint}`, {
+    const response = await fetch(url, {
       headers: {
         Cookie: connectSidCookie ? cookie : "",
       },
