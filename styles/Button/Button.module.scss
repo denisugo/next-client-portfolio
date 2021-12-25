@@ -8,8 +8,9 @@
   align-items: center;
   cursor: pointer;
 
-  &:hover,
-  &:focus {
+  // &:hover,
+  // &:focus {
+  &:hover {
     background: $colorOne;
   }
 

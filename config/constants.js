@@ -6,6 +6,7 @@ export const routes = {
   cart: "/cart",
   orders: "/orders",
   registration: "/registration",
+  checkout: "/checkout",
 };
 
 export const endpoints = {

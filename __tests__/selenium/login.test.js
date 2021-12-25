@@ -42,7 +42,7 @@ describe("Selenium login page", () => {
     expect(url).toBe(`http://localhost:3000/registration`);
   });
 
-  it("Should  redirect to user", async () => {
+  it("Should redirect to user", async () => {
     const username = "jb";
     const password = "secret";
 

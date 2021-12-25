@@ -13,7 +13,6 @@ describe("Selenium User page", () => {
   const firstName = "Abdul";
   const lastName = "Jafar";
   const newFirstName = "Boris";
-  let cookie;
 
   beforeAll(async () => {
     await driver.get("http://localhost:3000/registration");
@@ -49,7 +48,6 @@ describe("Selenium User page", () => {
     await driver.wait(until.urlIs("http://localhost:3000/user"), 3000);
     const url = await driver.getCurrentUrl();
     expect(url).toBe(`http://localhost:3000/user`);
-    cookie = await driver.manage().getCookies()[0];
   });
 
   it("Should open user page", async () => {

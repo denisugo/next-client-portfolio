@@ -106,17 +106,36 @@ describe("Selenium Product page", () => {
     //TODO: Test when clicking on add then redirecting to cart page and check if it is added
 
     it("Should add an item to a cart", async () => {
-      const button = (await findByDataTestSelenium("button", driver))[0];
+      let button = (await findByDataTestSelenium("button", driver))[0]; // add to cart button
       button.click();
-    });
-    it("Should add an item to a cart with quanttiy of 2", async () => {
-      const quantity = (await findByDataTestSelenium("input", driver))[0];
-      await quantity.sendKeys(2);
 
-      const button = (await findByDataTestSelenium("button", driver))[0];
+      // Redirecting to cart page
+      const navigation = await findByDataTestSelenium("navigation", driver);
+      const link = (await findByComponentSelenium("a", navigation[0]))[1]; //  cart link
+      link.click();
+
+      // Checks if the page address is correct
+      await driver.wait(until.urlIs("http://localhost:3000/cart"), 3000);
+
+      // Checks the number of cart items (new cart item data test id added)
+      let cartItem = await findByDataTestSelenium("cart-item", driver);
+      expect(cartItem.length).toBe(1);
+
+      button = (await findByDataTestSelenium("button", driver))[0]; // remove cart item button
       button.click();
-    });
 
-    // Teardown on cart page
+      // Now the cart item should be deleted
+      await driver.wait(async () => {
+        cartItem = await findByDataTestSelenium("cart-item", driver);
+        return cartItem.length === 0;
+      }, 3000);
+    });
+    // it("Should add an item to a cart with quanttiy of 2", async () => {
+    //   const quantity = (await findByDataTestSelenium("input", driver))[0];
+    //   await quantity.sendKeys(2);
+
+    //   const button = (await findByDataTestSelenium("button", driver))[0];
+    //   button.click();
+    // });
   });
 });
