@@ -1,4 +1,4 @@
-import orders from "../../pages/orders";
+import checkout from "../../pages/checkout";
 import * as reactRedux from "react-redux";
 import React from "react";
 import * as UserSlice from "../../features/UserSlice/UserSlice";
@@ -10,7 +10,7 @@ import {
   findByComponent,
 } from "../../utils/testUtils.js";
 
-describe("Orders page", () => {
+describe("Checkout page", () => {
   let props;
   let wrapper;
 
@@ -27,54 +27,29 @@ describe("Orders page", () => {
       //*  Next.js router setup
       router.default.push = jest.fn();
 
-      //* mocking fetch
-      fetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => {
-          return {
-            1: {
-              shipped: false,
-              products: [
-                { quantity: 2, product_id: 100, name: "aaa" },
-                { quantity: 2, product_id: 1, name: "aaa" },
-                { quantity: 2, product_id: 10, name: "aaa" },
-              ],
-            },
-          };
-        },
-      });
-
       jest.spyOn(React, "useEffect").mockImplementationOnce((f) => f());
 
-      wrapper = setUp(orders);
+      wrapper = setUp(checkout);
     });
 
     it("Should render orders page", () => {
-      const name = findByDataTest("name", wrapper);
-      expect(name.length).toBe(3);
-
-      const quantity = findByDataTest("quantity", wrapper);
-      expect(quantity.length).toBe(3);
+      const elements = findByDataTest("elements", wrapper);
+      expect(elements.length).toBe(1);
     });
   });
+
   describe("Redirecting", () => {
     it("Should redirect to login page", () => {
-      //  Redux router setup
+      //*  Redux router setup
       reactRedux.useSelector = jest.fn().mockReturnValue(false);
       UserSlice.selectUser = jest.fn();
 
-      //  Next.js router setup
+      //*  Next.js router setup
       router.default.push = jest.fn();
-
-      // mocking fetch
-      fetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => [{}, {}, {}],
-      });
 
       jest.spyOn(React, "useEffect").mockImplementationOnce((f) => f());
 
-      wrapper = setUp(orders);
+      wrapper = setUp(checkout);
 
       expect(router.default.push.mock.calls.length).toBe(1);
     });

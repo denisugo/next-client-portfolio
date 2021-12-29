@@ -27,12 +27,12 @@ export const setUp = (Component, props, path) => {
 //   return wrapper;
 // };
 
-export const findByDataTestSelenium = (attr, driver) => {
-  const elements = driver.findElements(By.css(`[data-testid='${attr}']`));
+export const findByDataTestSelenium = async (attr, driver) => {
+  const elements = await driver.findElements(By.css(`[data-testid='${attr}']`));
   return elements;
 };
-export const findByComponentSelenium = (componentCssName, driver) => {
-  const elements = driver.findElements(By.css(`${componentCssName}`));
+export const findByComponentSelenium = async (componentCssName, driver) => {
+  const elements = await driver.findElements(By.css(`${componentCssName}`));
   return elements;
 };
 export const findByDataTest = (attr, wrapper) => {

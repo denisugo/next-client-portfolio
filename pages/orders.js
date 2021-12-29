@@ -28,7 +28,7 @@ function Orders(props) {
   }, [user]);
 
   if (!user) return <div>No user found</div>;
-  console.log(items);
+
   return (
     <>
       <Meta title="Orders" description="test" />

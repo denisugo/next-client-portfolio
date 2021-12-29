@@ -2,6 +2,12 @@
 
 This app was build with Next js framework, tested with Jest and Selenium.
 
+Docs could be found in _Docs_ folder.
+
+## Preview
+
+![Preview](/Docs/portfolio.gif)
+
 ## Pros
 
 - Lightwight
@@ -18,9 +24,10 @@ This app was build with Next js framework, tested with Jest and Selenium.
 ## TODO:
 
 - Improve design.
-- Cought mistakes in components.
+- Catch mistakes in components.
 - Allow user to delete their account.
 - Recreate all components that contains `form ` item. It is importtant for the following todo.
 - Improve tests. Some tests requirs _teardown_ phase. Not all component have 100% test coverage.
 - Add mobile version
+- Add admin flow
 - Refactor selenium test suits

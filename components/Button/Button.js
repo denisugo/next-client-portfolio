@@ -8,6 +8,7 @@ function Button({
   fontSize = undefined,
   label = "button",
   className = "",
+  disabled = false,
 }) {
   return (
     <button
@@ -19,6 +20,7 @@ function Button({
       aria-label={label}
       onClick={callback}
       onSelect={callback}
+      disabled={disabled}
     >
       <p>{text}</p>
     </button>

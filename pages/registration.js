@@ -14,8 +14,6 @@ import { routes } from "../config/constants";
 import style from "../styles/Registration/Registration.module.css";
 
 function Registration(props) {
-  //TODO: Patterns and hits
-
   // Inputs setup
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
