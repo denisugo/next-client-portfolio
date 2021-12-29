@@ -6,7 +6,7 @@ Docs could be found in _Docs_ folder.
 
 ## Preview
 
-![Preview](/Docs/portfolio.gif)
+![Preview](/docs/portfolio.gif)
 
 ## Pros
 
