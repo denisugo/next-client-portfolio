@@ -1,8 +1,28 @@
+## Links
+
+This is the client app. It should work with [this API](https://github.com/denisugo/back_end_portfolio)
+
 ## Getting Started
 
 This app was build with Next js framework, tested with Jest and Selenium.
 
 Docs could be found in _Docs_ folder.
+
+## Initial setup
+
+To make it work, you should create _next.config.js_ at the root of this project and paste this:
+
+```
+ module.exports = {
+     reactStrictMode: true,
+     images: { domains: ["images.unsplash.com"], },
+     env: {
+         HOST: "http://localhost:4000/api/v1",
+         THIS: "http://localhost:3000",
+         STRIPE_PK: "Your_Stripe_PK_Key",
+         },
+    };
+```
 
 ## Preview
 
